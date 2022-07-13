@@ -312,6 +312,16 @@ def onmessage(update,bot:ObigramClient):
             bot.sendMessage(update.message.chat.id,tuto.read())
             tuto.close()
             return
+        if '/crypt' in msgText:
+            proxy_sms = str(msgText).split(' ')[1]
+            proxy = S5Crypto.encrypt(f'{proxy_sms}')
+            bot.sendMessage(update.message.chat.id, f'Encrypted proxy:\n{proxy}')
+            return
+        if '/decrypt' in msgText:
+            proxy_sms = str(msgText).split(' ')[1]
+            proxy_de = S5Crypto.decrypt(f'{proxy_sms}')
+            bot.sendMessage(update.message.chat.id, f'Decrypted proxy:\n{proxy_de}')
+            return    
         if '/myuser' in msgText:
             getUser = user_info
             if getUser:
